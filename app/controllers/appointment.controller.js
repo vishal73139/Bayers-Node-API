@@ -4,6 +4,7 @@ const { verifyToken } = require('../middleware/authJwt');
 const { APPOINTMENT_SUCCESSFUL } = require('../constants/constants');
 const { createAppointment } = require('../services/appointment.service');
 
+// Create Appointment for the patient
 router.post('/create', verifyToken, async (req, res) => {
     try {
         const { patientId, doctorId, date, timeSlot, reasonForVisit, notes, location } = req.body;

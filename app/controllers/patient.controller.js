@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { verifyToken } = require('../middleware/authJwt');
 const { PROFILE_UPDATE_SUCCESSFUL } = require('../constants/constants');
-const { updatePatient, findPatientByUserId } = require('../services/patient.service');
+const { updatePatient, findPatientByUserId, findPatientById } = require('../services/patient.service');
 
+
+// Edit Patient profile
 router.post('/editProfile', verifyToken, async (req, res) => {
     try {
         const { name, dob, bloodType, height, weight, allergies, userId } = req.body;
@@ -17,6 +19,8 @@ router.post('/editProfile', verifyToken, async (req, res) => {
     }
 });
 
+
+// Get appointment details
 router.get('/appointment/:id', verifyToken, async (req, res) => {
     try {
         let appointments = await findUpcomingAppointments(req.params.id)
@@ -26,10 +30,22 @@ router.get('/appointment/:id', verifyToken, async (req, res) => {
     }
 })
 
+
+// Get reminders for patient
 router.get('/reminders/:id', verifyToken, async (req, res) => {
     try {
-        let patientDetails = await findPatientByUserId(req.params.id)
+        const patientDetails = await findPatientByUserId(req.params.id)
         res.status(200).send({ reminders: patientDetails.healthReminders });
+    } catch (err) {
+        res.status(400).send({ message: err?.message });
+    }
+})
+
+// Get patient details
+router.get('/getPatientDetails/:id', verifyToken, async (req, res) => {
+    try {
+        const patientDetails = await findPatientById(req.params.id)
+        res.status(200).send({ details: patientDetails });
     } catch (err) {
         res.status(400).send({ message: err?.message });
     }
