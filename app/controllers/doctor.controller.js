@@ -100,7 +100,7 @@ router.get('/doctor-list', [verifyToken], async (req, res) => {
  ** @return
  **
  */
-router.get('/doctors/:id', async (req, res) => {
+router.get('/doctors/:id', [verifyToken], async (req, res) => {
 	try {
 		const doctor = await Doctor.findById(req.params.id).populate('user');
 
@@ -122,7 +122,7 @@ router.get('/doctors/:id', async (req, res) => {
  ** @return Updated Data
  **
  */
-router.put('/doctors/:id', async (req, res) => {
+router.put('/doctors/:id', [verifyToken], async (req, res) => {
 	try {
 		const { DOB, availableTimeSlot, SpecialtyIn } = req.body;
 
@@ -151,7 +151,7 @@ router.put('/doctors/:id', async (req, res) => {
  ** @return specialty
  **
  */
-router.get('/doctors/specialty/:specialty', async (req, res) => {
+router.get('/doctors/specialty/:specialty', [verifyToken], async (req, res) => {
 	try {
 		const specialty = req.params.specialty;
 		const doctors = await Doctor.find({ SpecialtyIn: specialty }).populate('user');
@@ -174,7 +174,7 @@ router.get('/doctors/specialty/:specialty', async (req, res) => {
  ** @return Time slots
  **
  */
-router.get('/doctors/:id/available-slots', async (req, res) => {
+router.get('/doctors/:id/available-slots', [verifyToken], async (req, res) => {
 	try {
 		const doctor = await Doctor.findById(req.params.id);
 
