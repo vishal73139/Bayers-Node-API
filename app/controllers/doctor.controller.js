@@ -154,7 +154,7 @@ router.put('/doctors/:id', [verifyToken], async (req, res) => {
 router.get('/doctors/specialty/:specialty', [verifyToken], async (req, res) => {
 	try {
 		const specialty = req.params.specialty;
-		const doctors = await Doctor.find({ SpecialtyIn: specialty }).populate('user');
+		const doctors = await Doctor.find({ SpecialtyIn: specialty });
 
 		if (doctors.length === 0) {
 			return res.status(404).json({ error: 'No doctors found for the given specialty' });
