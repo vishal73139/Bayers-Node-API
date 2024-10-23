@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/auth.config.js');
-const { findUser } = require('../service/user.service.js');
 
 /*
  **
