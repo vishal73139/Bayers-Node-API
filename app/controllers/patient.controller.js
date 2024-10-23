@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-const Patient = require("../models/patients.model");
 const { verifyToken } = require('../middleware/authJwt');
 const { PROFILE_UPDATE_SUCCESSFUL } = require('../constants/constants');
 const { updatePatient, findPatientByUserId } = require('../services/patient.service');
@@ -36,3 +34,5 @@ router.get('/reminders/:id', verifyToken, async (req, res) => {
         res.status(400).send({ message: err?.message });
     }
 })
+
+module.exports = router;
