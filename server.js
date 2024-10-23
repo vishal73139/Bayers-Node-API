@@ -12,6 +12,7 @@ const mongoDbConnection = require('./app/config/mongo-db-connect');
  ** @return {app}
  */
 const app = express();
+const authController = require('./app/controllers/auth.controller');
 
 var corsOptions = {
 	origin: 'http://localhost:3000'
@@ -28,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
  ** @param {app}
  ** @return {app}
  */
-//app.use('/api/auth', authController);
+app.use('/api/auth', authController);
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
