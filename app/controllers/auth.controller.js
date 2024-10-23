@@ -19,6 +19,7 @@ const { findUser, saveUser } = require('../services/user.service');
 const { verifyToken } = require('../middleware/authJwt');
 const { isEmailFormatCorrect } = require('../helpers/appHelper');
 const { savePatient } = require('../services/patient.service');
+const { INVALID_USER, INVALID_PASSWORD } = require('../constants/constants');
 
 /*
  **
@@ -32,23 +33,19 @@ router.post('/signin', async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
-		let errorMessage = 'Error : The password is invalid or the user does not have a password.';
-		let userNotVaildError =
-			'Error : There is no user record corresponding to this identifier. The user may have been deleted.';
-
 		if (!email || !password) {
-			return res.status(400).send({ message: errorMessage });
+			return res.status(400).send({ message: INVALID_PASSWORD });
 		}
 
 		const user = await findUser(email);
 		if (!user) {
-			return res.status(400).send({ message: userNotVaildError });
+			return res.status(400).send({ message: INVALID_USER });
 		}
 
 		var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
 		if (!passwordIsValid) {
-			return res.status(400).send({ message: errorMessage });
+			return res.status(400).send({ message: INVALID_PASSWORD });
 		}
 
 		const token = jwt.sign(
