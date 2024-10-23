@@ -1,32 +1,15 @@
 const mongoose = require("mongoose")
 
-const HealthRecord = new mongoose.Schema({
+const HealthRecordSchema = new mongoose.Schema({
     appointmentType: {
-        type: String
-    },
-    patientId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'appointments',
         required: true,
     },
-    doctorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required: true,
-    },
-    date: {
-        type: Date
-    },
-    timeSlot: {
-        type: Date
-    },
-    reasonForVisit: {
+    suggestedTest: {
         type: String
     },
-    notes: {
-        type: String
-    },
-    location: {
+    prescription: {
         type: String
     },
     createdAt: {
@@ -34,4 +17,4 @@ const HealthRecord = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('healthRecords', HealthRecord);
+module.exports = mongoose.model('healthRecords', HealthRecordSchema);
