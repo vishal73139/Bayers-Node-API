@@ -7,7 +7,7 @@ const { APPOINTMENT_SUCCESSFULLY } = require('../constants/constants');
 // Create Appointment for the patient
 router.post('/create', verifyToken, async (req, res) => {
     try {
-        const { patientId, doctorId, date, timeSlot, reasonForVisit, notes, location } = req.body;
+        const { patientId, doctorId, date, timeSlot, reasonForVisit, notes, location, appointmentType } = req.body;
         const appointmentDetails = {
             patientId,
             doctorId,
@@ -15,7 +15,8 @@ router.post('/create', verifyToken, async (req, res) => {
             timeSlot,
             reasonForVisit,
             notes,
-            location
+            location,
+            appointmentType
         }
 
         await createAppointment(appointmentDetails)
