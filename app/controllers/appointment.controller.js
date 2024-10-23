@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { verifyToken } = require('../middleware/authJwt');
-const { APPOINTMENT_SUCCESSFUL } = require('../constants/constants');
 const { createAppointment } = require('../services/appointment.service');
+const { APPOINTMENT_SUCCESSFULLY } = require('../constants/constants');
 
 // Create Appointment for the patient
 router.post('/create', verifyToken, async (req, res) => {
@@ -20,7 +20,7 @@ router.post('/create', verifyToken, async (req, res) => {
 
         createAppointment(appointmentDetails)
 
-        res.status(200).send({ message: APPOINTMENT_SUCCESSFUL });
+        res.status(200).send({ message: APPOINTMENT_SUCCESSFULLY });
     } catch (err) {
         res.status(400).send({ message: err?.message });
     }
