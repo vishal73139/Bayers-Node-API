@@ -12,6 +12,7 @@ const PASSWORD_ERROR = 'Password must be at least 8 characters!';
 const USER_REGISTER_SUCCESS = 'User was registered successfully!';
 const PROFILE_UPDATE_SUCCESSFULLY = 'Profile updated successfully';
 const DOCTOR_ADD_SUCCESSFULLY = 'Doctor add successfully';
+const APPOINTMENT_SUCCESSFULLY = 'Appointment created successfully';
 
 module.exports = {
 	// ERROR
@@ -24,7 +25,8 @@ module.exports = {
 	UNABLE_TO_REGISTER_ERROR,
 
 	// SUCCESS
-	USER_REGISTER_SUCCESS,
 	PROFILE_UPDATE_SUCCESSFULLY,
-	DOCTOR_ADD_SUCCESSFULLY
+	DOCTOR_ADD_SUCCESSFULLY,
+	APPOINTMENT_SUCCESSFULLY,
+	USER_REGISTER_SUCCESS
 };

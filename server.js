@@ -14,6 +14,7 @@ const mongoDbConnection = require('./app/config/mongo-db-connect');
 const app = express();
 const authController = require('./app/controllers/auth.controller');
 const patientController = require('./app/controllers/patient.controller');
+const appointmentController = require('./app/controllers/appointment.controller');
 const doctorController = require('./app/controllers/doctor.controller');
 
 var corsOptions = {
@@ -32,7 +33,8 @@ app.use(express.urlencoded({ extended: true }));
  ** @return {app}
  */
 app.use('/api/auth', authController);
-app.use('/api/patient', patientController);
+app.use('/api/patient', patientController)
+app.use('/api/appointment', appointmentController)
 app.use('/api/doctor', doctorController);
 
 // set port, listen for requests
