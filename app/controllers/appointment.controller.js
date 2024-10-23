@@ -18,7 +18,7 @@ router.post('/create', verifyToken, async (req, res) => {
             location
         }
 
-        createAppointment(appointmentDetails)
+        await createAppointment(appointmentDetails)
 
         res.status(200).send({ message: APPOINTMENT_SUCCESSFULLY });
     } catch (err) {
