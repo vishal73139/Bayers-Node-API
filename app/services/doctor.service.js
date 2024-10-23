@@ -26,7 +26,32 @@ const getAllDoctorsList = async () => {
 	]);
 };
 
+const getAllDoctorBasedOnSpecialty = async data => {
+	return await User.aggregate([
+		{ $match: { role: 'DOCTOR' } },
+		{
+			$lookup: {
+				from: 'doctors',
+				localField: '_id',
+				foreignField: 'userId',
+				as: 'doctorData'
+			}
+		},
+		{
+			$match: { SpecialtyIn: data }
+		},
+		{
+			$project: {
+				_id: 1,
+				name: 1,
+				email: 1,
+				doctorData: 1
+			}
+		}
+	]);
+};
 module.exports = {
 	saveDoctor,
-	getAllDoctorsList
+	getAllDoctorsList,
+	getAllDoctorBasedOnSpecialty
 };
